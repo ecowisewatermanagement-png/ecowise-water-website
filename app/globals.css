@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #12271e;
+}
+
+@theme inline {
+  /* Brand palette — leaf green + water blue, echoing the EcoWise mark */
+  --color-leaf-50: #f1faf4;
+  --color-leaf-100: #dcf2e3;
+  --color-leaf-200: #b6e3c6;
+  --color-leaf-400: #4fb476;
+  --color-leaf-500: #339a5c;
+  --color-leaf-600: #257d48;
+  --color-leaf-700: #1f6339;
+  --color-leaf-900: #123a22;
+
+  --color-water-50: #eef7fb;
+  --color-water-100: #d7edf6;
+  --color-water-400: #4fa4c9;
+  --color-water-500: #2f86ac;
+  --color-water-600: #23688a;
+
+  --color-navy-950: #0d1e2b;
+  --color-navy-900: #122a3c;
+  --color-navy-800: #1a3a52;
+  --color-navy-700: #244f6e;
+  --color-navy-500: #4d7391;
+
+  --color-stone-50: #f7f8f6;
+  --color-stone-100: #eef1ec;
+  --color-stone-200: #dde3d9;
+  --color-stone-500: #6b756e;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Typography */
+  --font-display: var(--font-manrope);
+  --font-sans: var(--font-inter);
+
+  --shadow-soft: 0 20px 50px -24px rgba(13, 30, 43, 0.25);
+  --shadow-soft-lg: 0 30px 80px -28px rgba(13, 30, 43, 0.3);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-leaf-500);
+  outline-offset: 2px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
