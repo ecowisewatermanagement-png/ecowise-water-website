@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -6,20 +7,22 @@ const proofPoints = ["No-cost assessment", "Serving Utah properties", "Rebate & 
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy-950">
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 15% 20%, var(--color-leaf-500) 0%, transparent 45%), radial-gradient(circle at 85% 80%, var(--color-water-500) 0%, transparent 50%)",
-        }}
+    <section className="bg-navy-950">
+      <Image
+        src="/header-banner.png"
+        alt="Sustainable Solutions. Stronger Communities. Helping businesses, communities, and property owners conserve water, reduce costs, and protect our future."
+        width={2246}
+        height={686}
+        priority
+        className="w-full object-cover"
       />
-      <Container className="relative py-24 sm:py-32">
+
+      <Container className="py-16 sm:py-20">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm font-semibold tracking-wide text-leaf-300 uppercase">
             Utah Water Conservation Consulting
           </p>
-          <h1 className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             Reduce Water Bills. Increase Rebates.{" "}
             <span className="text-leaf-400">Save Thousands.</span>
           </h1>

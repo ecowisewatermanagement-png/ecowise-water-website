@@ -21,8 +21,8 @@ export default function ProjectHistoryPage() {
         <Image
           src="/banner-conserve-today.png"
           alt="EcoWise Water Management — Conserve Today. Sustain Tomorrow."
-          width={1280}
-          height={328}
+          width={2172}
+          height={724}
           priority
           className="w-full object-cover"
         />
