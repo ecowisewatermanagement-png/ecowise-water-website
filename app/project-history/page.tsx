@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Building2, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { projectHistory, projectHistoryClosing } from "@/content/projects";
 import { Container } from "@/components/ui/Container";
@@ -40,36 +40,44 @@ export default function ProjectHistoryPage() {
             {projectHistory.map((project) => (
               <div
                 key={project.name}
-                className="flex flex-col rounded-2xl border border-stone-200 bg-white p-7 shadow-soft"
+                className="flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-soft"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-leaf-50">
-                  <Building2 className="h-5 w-5 text-leaf-600" />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-navy-950">
-                  {project.name}
-                </h3>
-                <p className="mt-1 flex items-center gap-1.5 text-sm text-stone-500">
-                  <MapPin className="h-3.5 w-3.5" />
-                  {project.location}
-                </p>
-                {project.note && (
-                  <span className="mt-3 inline-flex w-fit rounded-full bg-water-50 px-3 py-1 text-xs font-semibold text-water-600">
-                    {project.note}
-                  </span>
-                )}
-                <dl className="mt-5 space-y-2 text-sm">
-                  <div className="flex gap-2">
-                    <dt className="shrink-0 font-medium text-navy-900">Size:</dt>
-                    <dd className="text-stone-500">{project.size}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="shrink-0 font-medium text-navy-900">Client:</dt>
-                    <dd className="text-stone-500">{project.client}</dd>
-                  </div>
-                </dl>
-                <p className="mt-4 border-t border-stone-100 pt-4 text-sm leading-relaxed text-stone-600">
-                  {project.scope}
-                </p>
+                <div className="relative aspect-video w-full">
+                  <Image
+                    src={project.image}
+                    alt={`${project.name}, ${project.location}`}
+                    fill
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-7">
+                  <h3 className="font-display text-lg font-semibold text-navy-950">
+                    {project.name}
+                  </h3>
+                  <p className="mt-1 flex items-center gap-1.5 text-sm text-stone-500">
+                    <MapPin className="h-3.5 w-3.5" />
+                    {project.location}
+                  </p>
+                  {project.note && (
+                    <span className="mt-3 inline-flex w-fit rounded-full bg-water-50 px-3 py-1 text-xs font-semibold text-water-600">
+                      {project.note}
+                    </span>
+                  )}
+                  <dl className="mt-5 space-y-2 text-sm">
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 font-medium text-navy-900">Size:</dt>
+                      <dd className="text-stone-500">{project.size}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="shrink-0 font-medium text-navy-900">Client:</dt>
+                      <dd className="text-stone-500">{project.client}</dd>
+                    </div>
+                  </dl>
+                  <p className="mt-4 border-t border-stone-100 pt-4 text-sm leading-relaxed text-stone-600">
+                    {project.scope}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

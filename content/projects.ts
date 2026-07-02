@@ -5,6 +5,7 @@ export interface ProjectHistoryEntry {
   client: string;
   scope: string;
   note?: string;
+  image: string;
 }
 
 export const projectHistory: ProjectHistoryEntry[] = [
@@ -14,6 +15,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     size: "895,000 sq. ft. — 17-story building",
     client: "US General Services Administration",
     scope: "Retrofit toilets, faucets, and showerheads with low-flow devices; full repipe.",
+    image: "/projects/us-federal-court-san-diego.jpg",
   },
   {
     name: "US Federal Court — Historic Courthouse",
@@ -22,6 +24,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     client: "US General Services Administration",
     scope: "Retrofit toilets, faucets, and showerheads with low-flow devices.",
     note: "National Historic Register Property",
+    image: "/projects/us-federal-court-los-angeles.jpg",
   },
   {
     name: "Mission Inn Hotel",
@@ -30,6 +33,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     client: "Mission Inn Properties / Riverside Public Utilities",
     scope: "Fixture retrofits throughout the property.",
     note: "National Historic Register Property",
+    image: "/projects/mission-inn-hotel.jpg",
   },
   {
     name: "University of California, Irvine — Student Housing",
@@ -37,6 +41,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     size: "4 student housing buildings, approximately 25,000 sf per building",
     client: "UC Irvine",
     scope: "Water usage study via submetering, with fixture retrofitting.",
+    image: "/projects/uc-irvine-student-housing.jpg",
   },
   {
     name: "University of California, Riverside — Student Housing",
@@ -44,6 +49,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     size: "4 student housing buildings, approximately 25,000 sf per building",
     client: "UC Riverside",
     scope: "Water usage study via submetering, with fixture retrofitting.",
+    image: "/projects/uc-riverside-student-housing.png",
   },
   {
     name: "Elsinore Valley Municipal Water District",
@@ -52,6 +58,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     client: "Elsinore Valley Municipal Water District",
     scope:
       "Remove and install 10,000 Stealth 0.8 gpf toilets in single family homes; develop and manage customer and internal databases.",
+    image: "/projects/elsinore-valley-mwd.png",
   },
   {
     name: "Eastern Municipal Water District",
@@ -59,6 +66,7 @@ export const projectHistory: ProjectHistoryEntry[] = [
     size: "District-wide program",
     client: "Eastern Municipal Water District",
     scope: "Weather-based irrigation controller retrofit program.",
+    image: "/projects/eastern-mwd.png",
   },
 ];
 
