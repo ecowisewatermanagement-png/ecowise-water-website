@@ -4,40 +4,37 @@ import { useState, type FormEvent } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/maqgkqzg";
+
 const PROPERTY_TYPES = [
-  { value: "apartment-community", label: "Apartment Community" },
-  { value: "hoa", label: "Homeowners Association (HOA)" },
-  { value: "commercial", label: "Commercial Property" },
-  { value: "church-nonprofit", label: "Church / Non-Profit" },
-  { value: "school-public", label: "School / Public Facility" },
-  { value: "property-management", label: "Property Management Company" },
-  { value: "other", label: "Other" },
+  "Apartment Community",
+  "Homeowners Association (HOA)",
+  "Commercial Property",
+  "Church / Non-Profit",
+  "School / Public Facility",
+  "Property Management Company",
+  "Other",
 ];
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export function AssessmentForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const [errors, setErrors] = useState<Record<string, string[]>>({});
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("submitting");
-    setErrors({});
 
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
 
     try {
-      const res = await fetch("/api/assessment", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
       });
-      const json = await res.json();
 
       if (!res.ok) {
-        setErrors(json.errors ?? {});
         setStatus("error");
         return;
       }
@@ -62,17 +59,16 @@ export function AssessmentForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      {/* Honeypot */}
-      <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" />
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <input type="hidden" name="_subject" value="New No Cost Water Assessment request" />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Full Name" name="name" required error={errors.name?.[0]} />
-        <Field label="Email" name="email" type="email" required error={errors.email?.[0]} />
+        <Field label="Full Name" name="name" required />
+        <Field label="Email" name="email" type="email" required />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Phone" name="phone" type="tel" error={errors.phone?.[0]} />
+        <Field label="Phone" name="phone" type="tel" />
         <div>
           <label htmlFor="propertyType" className="mb-2 block text-sm font-medium text-navy-900">
             Property Type
@@ -84,15 +80,15 @@ export function AssessmentForm() {
           >
             <option value="">Select one</option>
             {PROPERTY_TYPES.map((type) => (
-              <option key={type.value} value={type.value}>
-                {type.label}
+              <option key={type} value={type}>
+                {type}
               </option>
             ))}
           </select>
         </div>
       </div>
 
-      <Field label="Property Address" name="propertyAddress" error={errors.propertyAddress?.[0]} />
+      <Field label="Property Address" name="propertyAddress" />
 
       <div>
         <label htmlFor="message" className="mb-2 block text-sm font-medium text-navy-900">
@@ -107,8 +103,10 @@ export function AssessmentForm() {
         />
       </div>
 
-      {status === "error" && Object.keys(errors).length === 0 && (
-        <p className="text-sm text-red-600">Something went wrong. Please try again.</p>
+      {status === "error" && (
+        <p className="text-sm text-red-600">
+          Something went wrong sending your request. Please try again, or call us directly.
+        </p>
       )}
 
       <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={status === "submitting"}>
@@ -124,13 +122,11 @@ function Field({
   name,
   type = "text",
   required = false,
-  error,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
-  error?: string;
 }) {
   return (
     <div>
@@ -145,7 +141,6 @@ function Field({
         required={required}
         className="h-12 w-full rounded-lg border border-stone-200 bg-white px-4 text-sm text-navy-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500"
       />
-      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>
   );
 }

@@ -15,13 +15,13 @@ Open [http://localhost:3300](http://localhost:3300) (dev server runs on port 330
 
 ## Project Structure
 
-- `app/` — routes (`/`, `/services`, `/about`, `/contact`), the assessment API route, and SEO files (`sitemap.ts`, `robots.ts`, `opengraph-image.tsx`)
+- `app/` — routes (`/`, `/services`, `/about`, `/contact`, `/project-history`), and SEO files (`sitemap.ts`, `robots.ts`, `opengraph-image.tsx`)
 - `components/ui/` — design system primitives (Button, Card, Container, SectionHeading)
 - `components/layout/` — Header, Footer
-- `components/sections/` — homepage/page sections (Hero, ServicesGrid, WhoWeHelp, WhyItMatters, ProcessSteps, CtaBand)
-- `components/forms/` — the Free Assessment lead form
-- `content/` — site copy and structured data (services, audiences, process steps), pulled from EcoWise's existing assessment PDF and live site copy
-- `lib/` — validation (zod), email (Resend wrapper), SEO helpers, `cn()` utility
+- `components/sections/` — homepage/page sections (Hero, ServicesGrid, WhoWeHelp, WhyItMatters, ProcessSteps, CtaBand, NoCostAssessment)
+- `components/forms/` — the Free Assessment lead form, which submits directly to Formspree
+- `content/` — site copy and structured data (services, audiences, process steps, project history), pulled from EcoWise's existing assessment PDF and live site copy
+- `lib/` — SEO helpers, `cn()` utility
 
 ## Content Editing
 
@@ -31,7 +31,7 @@ Replace the placeholder brand mark in `components/layout/Header.tsx` / `Footer.t
 
 ## Forms & Lead Delivery
 
-The Free Assessment form on `/contact` POSTs to `app/api/assessment/route.ts`, which validates with zod and calls `lib/email.ts`. Without `RESEND_API_KEY` set, submissions are logged server-side (visible in your terminal) so no lead is lost during development. Copy `.env.example` to `.env.local` and add a Resend API key to enable real email delivery to `jack@ecowisewater.com`.
+The Free Assessment form (`components/forms/AssessmentForm.tsx`) POSTs directly to [Formspree](https://formspree.io) (endpoint id `maqgkqzg`), which emails submissions straight to the inbox connected to that Formspree form. No API keys or environment variables needed — manage the notification email and spam filtering from the Formspree dashboard.
 
 ## SEO
 
@@ -42,4 +42,4 @@ The Free Assessment form on `/contact` POSTs to `app/api/assessment/route.ts`, w
 
 ## Deployment
 
-Deploy to [Vercel](https://vercel.com/new) (recommended) or any Node hosting that supports Next.js. Set `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `LEADS_EMAIL` as environment variables before going live — see `.env.example`. Point the `ecowisewater.com` domain here once you're ready to retire the Google Sites version.
+Deployed on [Vercel](https://vercel.com/new), live at `ecowisewater.com`. No environment variables are required.
