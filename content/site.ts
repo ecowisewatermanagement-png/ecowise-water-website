@@ -21,6 +21,7 @@ export const primaryNav = [
   { label: "Project History", href: "/project-history" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Client Portal", href: "https://portal.ecowisewater.com" },
 ] as const;
 
 export const footerNav = {
